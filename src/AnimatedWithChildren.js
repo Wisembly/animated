@@ -17,10 +17,15 @@ class AnimatedWithChildren extends Animated {
 
   constructor() {
     super();
-    this._children = [];
+    if (typeof this._children === 'undefined') {
+      this._children = [];
+    }
   }
 
   __addChild(child: Animated): void {
+    if (typeof this._children === 'undefined') {
+      this._children = [];
+    }
     if (this._children.length === 0) {
       this.__attach();
     }
@@ -28,6 +33,9 @@ class AnimatedWithChildren extends Animated {
   }
 
   __removeChild(child: Animated): void {
+    if (typeof this._children === 'undefined') {
+      this._children = [];
+    }
     var index = this._children.indexOf(child);
     if (index === -1) {
       console.warn('Trying to remove a child that doesn\'t exist');
@@ -40,6 +48,9 @@ class AnimatedWithChildren extends Animated {
   }
 
   __getChildren(): Array<Animated> {
+    if (typeof this._children === 'undefined') {
+      this._children = [];
+    }
     return this._children;
   }
 }
